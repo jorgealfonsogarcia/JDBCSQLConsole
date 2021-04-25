@@ -1,3 +1,7 @@
+/*
+ *   Copyright (c) 2021 Jorge Garcia
+ *   All rights reserved.
+ */
 package net.comtor.jdbcconsole;
 
 import java.io.BufferedReader;
@@ -21,8 +25,10 @@ import java.util.logging.Logger;
 public class JDBCSqlConsole {
 
     private static ResourceBundle bundle = ResourceBundle.getBundle(JDBCSqlConsole.class.getCanonicalName());
+
     public final static String name = "JDBCSqlConsole";
-    public final static String version = "2.0.1 - 2014/Jan/27";
+    public final static String version = "2.0.1 - 2021/Abr/24";
+
     public final static int CMD_QUERY = 1;
     public final static int CMD_EXPORT_CSV = 2;
     public final static int CMD_EXPORT_EXCEL = 3;
@@ -249,8 +255,7 @@ public class JDBCSqlConsole {
             CommandQuery.commandQueryExcel(conn, queryStr, showHeaders, showMetaData, filename);
         } else if (commandId == CMD_EXPORT_CSV) {
             if (filename != null) {
-                try {
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))){
                     writer.write(CommandQuery.commandQuery(conn, queryStr, showHeaders, ",", showMetaData));
                     writer.close();
                 } catch (IOException ex) {
