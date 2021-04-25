@@ -244,7 +244,6 @@ public class JDBCSqlConsole {
      * Executes a command given its id
      */
     private static void executeCommand(Connection conn, int commandId, String queryStr) {
-//System.out.println("Command ID:"+commandId+"/query:"+queryStr);
         if (commandId == CMD_QUERY) {
             System.out.println(CommandQuery.commandQuery(conn, queryStr, showHeaders, separator, showMetaData));
         } else if (commandId == CMD_GENERATE_CREATE_TABLE) {
@@ -313,5 +312,9 @@ public class JDBCSqlConsole {
                 }
             }
         }
+    }
+
+    protected void ejemplo(){
+        System.out.println("Ejemplo");
     }
 }
